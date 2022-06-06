@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <androidx.appcompat.widget.Toolbar android:id="@+id/integration_toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:gravity="center_horizontal"
+        app:navigationIcon="?attr/homeAsUpIndicator"
+        app:title="@string/hsdk_perms_needed"
+        android:elevation="4dp"
+        android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar">
+
+    </androidx.appcompat.widget.Toolbar>
+
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:fillViewport="true">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="@dimen/hsdk__standard_padding">
+
+            <TextView android:id="@+id/app_name_header"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textStyle="bold"
+                android:paddingBottom="@dimen/hsdk__large_padding"
+                android:text="@string/hsdk_want_perms"/>
+
+            <TextView android:id="@+id/overview_phone"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingBottom="@dimen/hsdk__standard_padding"
+                android:drawablePadding="@dimen/hsdk__standard_padding"
+                android:drawableStart="@drawable/hsdk_ic_phone"
+                android:text="@string/hsdk_want_phone"/>
+
+            <TextView android:id="@+id/overview_sms"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingBottom="@dimen/hsdk__standard_padding"
+                android:drawablePadding="@dimen/hsdk__standard_padding"
+                android:drawableStart="@drawable/hsdk_ic_sms"
+                android:text="@string/hsdk_want_sms"/>
+
+            <TextView android:id="@+id/overview_over"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingBottom="@dimen/hsdk__standard_padding"
+                android:drawablePadding="@dimen/hsdk__standard_padding"
+                android:drawableStart="@drawable/hsdk_ic_overlay"
+                android:text="@string/hsdk_want_overlay"/>
+
+            <TextView android:id="@+id/overview_access"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingBottom="@dimen/hsdk__large_padding"
+                android:drawablePadding="@dimen/hsdk__standard_padding"
+                android:drawableStart="@drawable/hsdk_ic_accessibility"
+                android:text="@string/hsdk_want_accessibility"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingBottom="@dimen/hsdk__standard_padding"
+                android:text="@string/hsdk_want_detail"/>
+
+            <View android:layout_width="match_parent"
+                  android:layout_height="0dp"
+                  android:layout_weight="1" />
+        </LinearLayout>
+    </androidx.core.widget.NestedScrollView>
+</LinearLayout>

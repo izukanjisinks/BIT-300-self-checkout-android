@@ -1,0 +1,144 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+	xmlns:tools="http://schemas.android.com/tools"
+	android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/btn_bar_pin"
+        android:importantForAccessibility="noHideDescendants">
+
+        <LinearLayout android:id="@+id/row_one"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+                <Button android:text="@string/hsdk_one"
+			  	style="?hover_pinTheme"
+                        android:layout_width="0dp"
+                        android:layout_weight="1"
+                        android:layout_height="48dp"
+                        android:layout_margin="@dimen/hsdk__small_padding"
+                        android:typeface="monospace"
+                        android:onClick="enterNumber"
+	                tools:ignore="ButtonStyle" />
+                <Button android:text="@string/hsdk_two"
+			  	style="?hover_pinTheme"
+                        android:layout_width="0dp"
+                        android:layout_weight="1"
+                        android:layout_height="48dp"
+                        android:layout_margin="@dimen/hsdk__small_padding"
+                        android:typeface="monospace"
+                        android:onClick="enterNumber"
+	                tools:ignore="ButtonStyle" />
+                <Button android:text="@string/hsdk_three"
+			  	style="?hover_pinTheme"
+                        android:layout_width="0dp"
+                        android:layout_weight="1"
+                        android:layout_height="48dp"
+                        android:layout_margin="@dimen/hsdk__small_padding"
+                        android:typeface="monospace"
+                        android:onClick="enterNumber"
+	                tools:ignore="ButtonStyle" />
+        </LinearLayout>
+
+
+        <LinearLayout android:id="@+id/row_two"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/row_one">
+                <Button android:text="@string/hsdk_four"
+			  	style="?hover_pinTheme"
+                        android:layout_width="0dp"
+                        android:layout_weight="1"
+                        android:layout_height="48dp"
+                        android:layout_margin="@dimen/hsdk__small_padding"
+                        android:typeface="monospace"
+                        android:onClick="enterNumber"
+	                tools:ignore="ButtonStyle" />
+                <Button android:text="@string/hsdk_five"
+			  	style="?hover_pinTheme"
+                        android:layout_width="0dp"
+                        android:layout_weight="1"
+                        android:layout_height="48dp"
+                        android:layout_margin="@dimen/hsdk__small_padding"
+                        android:typeface="monospace"
+                        android:onClick="enterNumber"
+	                tools:ignore="ButtonStyle" />
+                <Button android:text="@string/hsdk_six"
+			  	style="?hover_pinTheme"
+                        android:layout_width="0dp"
+                        android:layout_weight="1"
+                        android:layout_height="48dp"
+                        android:layout_margin="@dimen/hsdk__small_padding"
+                        android:typeface="monospace"
+                        android:onClick="enterNumber"
+	                tools:ignore="ButtonStyle" />
+        </LinearLayout>
+
+        <LinearLayout android:id="@+id/row_three"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/row_two">
+                <Button android:text="@string/hsdk_seven"
+			  	style="?hover_pinTheme"
+                        android:layout_width="0dp"
+                        android:layout_weight="1"
+                        android:layout_height="48dp"
+                        android:layout_margin="@dimen/hsdk__small_padding"
+                        android:typeface="monospace"
+                        android:onClick="enterNumber"
+	                tools:ignore="ButtonStyle" />
+                <Button android:text="@string/hsdk_eight"
+			  	style="?hover_pinTheme"
+                        android:layout_width="0dp"
+                        android:layout_weight="1"
+                        android:layout_height="48dp"
+                        android:layout_margin="@dimen/hsdk__small_padding"
+                        android:typeface="monospace"
+                        android:onClick="enterNumber"
+	                tools:ignore="ButtonStyle" />
+                <Button android:text="@string/hsdk_nine"
+			  	style="?hover_pinTheme"
+                        android:layout_width="0dp"
+                        android:layout_weight="1"
+                        android:layout_height="48dp"
+                        android:layout_margin="@dimen/hsdk__small_padding"
+                        android:typeface="monospace"
+                        android:onClick="enterNumber"
+	                tools:ignore="ButtonStyle" />
+        </LinearLayout>
+
+        <LinearLayout android:id="@+id/row_four"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/row_three">
+
+                <Button android:text=""
+			  	style="?hover_pinTheme"
+                        android:layout_width="0dp"
+                        android:layout_weight="1"
+                        android:layout_height="48dp"
+                        android:layout_margin="@dimen/hsdk__small_padding"
+                        android:typeface="monospace"
+                        android:visibility="invisible"/>
+                <Button android:text="@string/hsdk_zero"
+			  	style="?hover_pinTheme"
+                        android:layout_width="0dp"
+                        android:layout_weight="1"
+                        android:layout_height="48dp"
+                        android:layout_margin="@dimen/hsdk__small_padding"
+                        android:typeface="monospace"
+                        android:onClick="enterNumber"/>
+                <ImageButton
+                        android:src="@drawable/hsdk_ic_backspace"
+			  	style="?hover_pinTheme"
+                        android:layout_width="0dp"
+                        android:layout_weight="1"
+                        android:layout_height="48dp"
+                        android:layout_margin="@dimen/hsdk__small_padding"
+                        android:paddingTop="14dp"
+                        android:paddingBottom="14dp"
+                        android:typeface="monospace"
+                        android:scaleType="fitCenter"
+                        android:tint="?attr/hover_textColor"
+                        android:contentDescription="@string/hsdk_backspace_ic"
+                        android:onClick="removeNumber" />
+        </LinearLayout>
+</RelativeLayout>

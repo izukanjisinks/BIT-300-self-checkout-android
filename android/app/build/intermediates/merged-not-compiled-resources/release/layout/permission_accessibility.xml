@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+	xmlns:tools="http://schemas.android.com/tools"
+	android:layout_width="match_parent"
+	android:layout_height="wrap_content"
+	android:fillViewport="false">
+
+	<LinearLayout
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:orientation="vertical"
+		android:padding="@dimen/hsdk__standard_padding">
+
+		<LinearLayout android:id="@+id/title"
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			android:paddingTop="@dimen/hsdk__small_padding"
+			android:paddingBottom="@dimen/hsdk__small_padding"
+			tools:ignore="UseCompoundDrawables">
+
+			<ImageView android:id="@+id/icon"
+				android:layout_width="36dp"
+				android:layout_height="36dp"
+				android:contentDescription="@string/hsdk_permission_ic"
+				android:tint="@color/hsdk_android_settings_color_v21"
+				android:src="@drawable/hsdk_ic_accessibility"/>
+
+			<TextView android:id="@+id/description"
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content"
+				android:paddingStart="@dimen/hsdk__standard_padding"
+				android:paddingEnd="@dimen/hsdk__tiny_padding"
+				android:textAppearance="@android:style/TextAppearance.DeviceDefault.Medium"
+				android:text="@string/hsdk_access_msg"/>
+
+		</LinearLayout>
+
+		<LinearLayout
+			android:layout_height="wrap_content"
+			android:layout_width="match_parent"
+			android:gravity="center"
+			android:padding="@dimen/hsdk__small_padding"
+			android:background="#F0F0F0">
+
+			<include android:id="@+id/access_list"
+				android:layout_width="0dp"
+				android:layout_height="wrap_content"
+				android:layout_weight="5"
+				layout="@layout/permission_mock_find_app" />
+
+			<ImageView android:id="@+id/arrow"
+				android:layout_width="0dp"
+				android:layout_height="wrap_content"
+				android:layout_weight="1"
+				android:contentDescription="@string/hsdk_next_ic"
+				android:src="@drawable/hsdk_ic_arrow_right"/>
+
+			<include android:id="@+id/overlay_example"
+				android:layout_width="0dp"
+				android:layout_height="wrap_content"
+				android:layout_weight="5"
+				layout="@layout/permission_mock_toggle" />
+		</LinearLayout>
+	</LinearLayout>
+</ScrollView>

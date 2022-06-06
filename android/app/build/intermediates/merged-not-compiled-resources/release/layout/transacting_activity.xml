@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:fitsSystemWindows="true"
+    android:orientation="vertical"
+    tools:context="com.hover.sdk.api.SessionActivity"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:importantForAccessibility="noHideDescendants">
+
+   <!--
+    <androidx.appcompat.widget.Toolbar android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:background="?attr/colorPrimary"
+        android:elevation="4dp"
+        android:padding="@dimen/hsdk__small_padding"
+        app:title=" ">
+
+        <TextView android:id="@+id/user_title"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:textColor="@color/hsdk_white"
+            android:gravity="center_vertical"
+            android:textSize="20sp"
+            android:text="@string/hsdk_confirm"
+            android:textAppearance="@style/TextAppearance.Widget.AppCompat.Toolbar.Title"/>
+
+    </androidx.appcompat.widget.Toolbar>
+
+    -->
+
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:fillViewport="true">
+
+        <FrameLayout
+            tools:layout="@layout/transacting_fragment"
+            android:id="@+id/transacting_fragment"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:background="?attr/hover_primaryColor"
+            android:paddingStart="@dimen/hsdk__standard_padding"
+            android:paddingEnd="@dimen/hsdk__standard_padding"/>
+    </androidx.core.widget.NestedScrollView>
+
+</LinearLayout>

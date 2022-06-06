@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+	android:orientation="vertical"
+	android:layout_width="match_parent"
+	android:layout_height="wrap_content"
+	android:layout_below="@id/phone_top_list"
+	android:layout_marginStart="3dp"
+	android:layout_marginEnd="3dp">
+
+	<include layout="@layout/mock_os_header" />
+
+	<LinearLayout
+		android:layout_width="match_parent"
+		android:layout_height="40dp"
+		android:orientation="vertical"
+		android:background="#F6F4F4">
+
+		<View
+			android:layout_width="match_parent"
+			android:layout_height="10dp"
+			android:layout_marginTop="@dimen/hsdk__small_padding"
+			android:layout_marginBottom="@dimen/hsdk__tiny_padding"
+			android:layout_marginStart="@dimen/hsdk__small_padding"
+			android:layout_marginEnd="@dimen/hsdk__large_padding"
+			android:background="#DCDCDC"/>
+
+		<View
+			android:layout_width="match_parent"
+			android:layout_height="10dp"
+			android:layout_marginTop="@dimen/hsdk__tiny_padding"
+			android:layout_marginBottom="@dimen/hsdk__tiny_padding"
+			android:layout_marginStart="@dimen/hsdk__small_padding"
+			android:layout_marginEnd="@dimen/hsdk__large_padding"
+			android:background="#DCDCDC"/>
+
+	</LinearLayout>
+
+	<RelativeLayout
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content">
+
+		<LinearLayout
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			android:paddingTop="@dimen/hsdk__tiny_padding"
+			android:paddingBottom="@dimen/hsdk__tiny_padding"
+			android:paddingStart="2dp"
+			android:paddingEnd="2dp"
+			android:background="#D5D4D4">
+
+			<LinearLayout android:id="@+id/our_app"
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content"
+				android:layout_marginEnd="@dimen/hsdk__tiny_padding"
+				android:layout_marginBottom="@dimen/hsdk__small_padding"
+				android:layout_marginStart="@dimen/hsdk__tiny_padding"
+				android:orientation="vertical"
+				android:gravity="center_vertical"
+				android:background="@color/hsdk_white"
+				android:elevation="4dp">
+
+
+				<TextView android:id="@+id/app_name"
+					android:layout_width="wrap_content"
+					android:layout_height="wrap_content"
+					android:paddingStart="@dimen/hsdk__small_padding"
+					android:paddingEnd="@dimen/hsdk__standard_padding"
+					android:paddingTop="@dimen/hsdk__tiny_padding"
+					android:paddingBottom="@dimen/hsdk__tiny_padding"
+					android:textStyle="bold"
+					android:textColor="@color/hsdk_black"
+					android:text="@string/hsdk_app_name_literal"/>
+
+				<View android:id="@+id/line_2"
+					android:layout_width="match_parent"
+					android:layout_height="1dp"
+					android:background="@color/hsdk_vertical_line"/>
+			</LinearLayout>
+		</LinearLayout>
+
+		<ImageView
+			android:layout_width="35dp"
+			android:layout_height="50dp"
+			android:layout_marginTop="@dimen/hsdk__large_padding"
+			android:layout_alignParentEnd="true"
+			android:layout_marginEnd="@dimen/hsdk__standard_padding"
+			android:scaleType="fitXY"
+			android:adjustViewBounds="true"
+			android:contentDescription="@string/hsdk_hand_ic"
+			android:src="@drawable/hsdk_svg_hand_touch"/>
+	</RelativeLayout>
+</LinearLayout>

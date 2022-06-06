@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="?attr/hover_primaryColor"
+    android:importantForAccessibility="noHideDescendants">
+
+	<LinearLayout android:id="@+id/action_title"
+	    android:orientation="vertical"
+	    android:layout_width="match_parent"
+	    android:layout_height="wrap_content"
+	    android:layout_alignParentTop="true"
+	    android:paddingTop="@dimen/hsdk__standard_padding"
+	    android:paddingBottom="@dimen/hsdk__standard_padding">
+
+		<TextView android:id="@+id/action_name"
+		    android:layout_width="match_parent"
+		    android:layout_height="wrap_content"
+		    android:textColor="?attr/hover_textColor"
+		    android:textSize="22sp"/>
+
+		<TextView android:id="@+id/action_sim"
+		    android:layout_width="match_parent"
+		    android:layout_height="wrap_content"
+		    android:textColor="?attr/hover_textColor"
+		    android:textSize="18sp"/>
+	</LinearLayout>
+
+	<ListView android:id="@+id/transaction_params"
+	    android:layout_width="match_parent"
+	    android:layout_height="0dp"
+	    android:layout_below="@id/action_title"
+	    android:layout_above="@id/btn_bar_confirm"
+	    android:divider="@null"
+	    tools:listitem="@layout/transacting_confirm_row"/>
+
+	<LinearLayout android:id="@+id/btn_bar_confirm"
+	    android:layout_width="match_parent"
+	    android:layout_height="wrap_content"
+	    android:layout_marginBottom="@dimen/hsdk__small_padding"
+	    android:layout_alignParentBottom="true">
+
+		<Button
+		    android:background="@drawable/back_button_bg"
+		    android:layout_height="wrap_content"
+		    android:gravity="center"
+		    android:layout_width="0dp"
+		    android:layout_weight="1"
+		    android:layout_margin="@dimen/hsdk__small_padding"
+		    android:paddingHorizontal="@dimen/hsdk__standard_padding"
+		    android:paddingVertical="8dp"
+		    android:text="@string/hsdk_back"
+		    android:layout_gravity="center"
+		    android:textAllCaps="false"
+		    android:textColor="?attr/hover_textColor"
+		    android:onClick="cancel" />
+
+		<Button android:id="@+id/continueTransaction"
+		    android:background="@drawable/confirmbutton_bg"
+		    android:layout_height="wrap_content"
+		    android:layout_width="0dp"
+		    android:layout_weight="1"
+		    android:textAllCaps="false"
+		    android:textColor="@color/colorPureWhite"
+		    android:layout_margin="@dimen/hsdk__small_padding"
+		    android:padding="@dimen/hsdk__standard_padding"
+		    android:text="@string/hsdk_continue" />
+
+	</LinearLayout>
+</RelativeLayout>

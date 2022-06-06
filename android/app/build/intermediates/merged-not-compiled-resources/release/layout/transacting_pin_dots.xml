@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:minHeight="72dp"
+                android:layout_above="@+id/pin_pad_layout"
+                android:orientation="vertical"
+                android:layout_gravity="center"
+                android:layout_margin="@dimen/hsdk__small_padding">
+
+    <TextView android:id="@+id/pin_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:padding="@dimen/hsdk__small_padding"
+        android:textColor="?attr/hover_pinEntryColor"
+        android:gravity="center_vertical"
+        android:textSize="20sp"
+        android:text="@string/hsdk_confirm"
+        android:textAppearance="@style/TextAppearance.Widget.AppCompat.Toolbar.Title"/>
+
+    <TextView android:id="@+id/pin_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/pin_title"
+        android:layout_centerHorizontal="true"
+        android:textColor="?attr/hover_pinEntryColor"
+        android:text="@string/hsdk_enter_pin_generic"/>
+
+    <LinearLayout android:id="@+id/dot_container"
+        android:layout_width="wrap_content"
+        android:layout_height="0dp"
+        android:minHeight="28dp"
+        android:minWidth="@dimen/hsdk__max_headroom"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@+id/pin_text"
+        android:layout_above="@+id/secure_text"
+        android:layout_margin="@dimen/hsdk__small_padding"
+        android:orientation="vertical"
+        android:gravity="center">
+
+        <LinearLayout android:id="@+id/dots"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:minHeight="28dp"
+            android:layout_marginTop="@dimen/hsdk__small_padding"
+            android:layout_marginBottom="@dimen/hsdk__small_padding"
+            android:layout_gravity="center"
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
+        </LinearLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:minWidth="@dimen/hsdk__max_headroom"
+            android:layout_height="1dp"
+            android:layout_gravity="bottom"
+            android:background="?attr/hover_pinEntryColor" />
+    </LinearLayout>
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/secure_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginTop="@dimen/hsdk__small_padding"
+        android:gravity="center"
+        android:layout_gravity="center"
+        android:drawablePadding="@dimen/hsdk__small_padding"
+        android:drawableStart="@drawable/hsdk_ic_security"
+        android:drawableTint="?attr/hover_pinEntryColor"
+        android:textColor="?attr/hover_pinEntryColor"
+        android:text="@string/hsdk_secure"/>
+
+</RelativeLayout>

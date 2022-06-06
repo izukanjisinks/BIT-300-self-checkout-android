@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+	android:orientation="vertical"
+	android:layout_width="match_parent"
+	android:layout_height="wrap_content"
+	android:layout_below="@id/phone_top_toggle"
+	android:layout_marginStart="3dp"
+	android:layout_marginEnd="3dp">
+
+	<include layout="@layout/mock_os_header" />
+
+	<LinearLayout
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:paddingStart="@dimen/hsdk__tiny_padding"
+		android:paddingEnd="@dimen/hsdk__tiny_padding"
+		android:orientation="horizontal"
+		android:gravity="center_vertical"
+		android:background="#F6F4F4">
+
+		<View
+			android:layout_width="0dp"
+			android:layout_height="10dp"
+			android:layout_weight="1"
+			android:layout_marginStart="@dimen/hsdk__tiny_padding"
+			android:layout_marginEnd="@dimen/hsdk__small_padding"
+			android:background="#DCDCDC"/>
+
+		<ImageView
+			android:layout_width="42dp"
+			android:layout_height="36dp"
+			android:layout_gravity="end|center_vertical"
+			android:layout_marginTop="@dimen/hsdk__tiny_padding"
+			android:layout_marginEnd="@dimen/hsdk__tiny_padding"
+			android:scaleType="fitXY"
+			android:adjustViewBounds="true"
+			android:contentDescription="@string/hsdk_toggle_ic"
+			android:src="@drawable/hsdk_svg_toggle"/>
+	</LinearLayout>
+
+	<ImageView
+		android:layout_width="42dp"
+		android:layout_height="60dp"
+		android:layout_gravity="end"
+		android:layout_marginTop="@dimen/hsdk__tiny_padding"
+		android:layout_marginEnd="@dimen/hsdk__small_padding"
+		android:scaleType="fitXY"
+		android:adjustViewBounds="true"
+		android:contentDescription="@string/hsdk_hand_ic"
+		android:src="@drawable/hsdk_svg_hand_toggle"/>
+
+</LinearLayout>

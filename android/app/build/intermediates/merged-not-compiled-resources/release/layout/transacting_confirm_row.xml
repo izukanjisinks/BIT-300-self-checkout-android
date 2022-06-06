@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+	android:layout_width="match_parent"
+	android:layout_height="wrap_content"
+	android:orientation="vertical">
+
+	<TextView android:id="@+id/name"
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:paddingBottom="2dp"
+		android:ellipsize="none"
+		android:scrollHorizontally="false"
+		android:text="@string/hsdk_sim"
+		android:textAllCaps="true"
+		android:textColor="?attr/hover_textColorTitle"
+		android:textSize="16sp"/>
+
+	<TextView android:id="@+id/value"
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:paddingBottom="@dimen/hsdk__standard_padding"
+		android:text="@string/hsdk_wrong_sim"
+		android:textColor="?attr/hover_textColor"
+		android:textSize="18sp"
+		android:ellipsize="none"
+		android:scrollHorizontally="false"/>
+</LinearLayout>

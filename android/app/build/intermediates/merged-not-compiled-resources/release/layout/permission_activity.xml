@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              xmlns:app="http://schemas.android.com/apk/res-auto"
+              android:orientation="vertical"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:theme="@style/HoverCustomDialogTheme">
+
+    <androidx.appcompat.widget.Toolbar android:id="@+id/integration_toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:gravity="center_horizontal"
+        app:title="@string/hsdk_perms_needed"
+        android:elevation="4dp">
+
+    </androidx.appcompat.widget.Toolbar>
+
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:fillViewport="true">
+
+        <FrameLayout android:id="@+id/onboarding_fragment"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <include android:id="@+id/overview"
+                     layout="@layout/permission_overview"/>
+
+        </FrameLayout>
+
+    </androidx.core.widget.NestedScrollView>
+</LinearLayout>

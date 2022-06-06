@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+	android:orientation="vertical"
+	android:layout_width="match_parent"
+	android:layout_height="wrap_content">
+
+	<LinearLayout
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:padding="@dimen/hsdk__tiny_padding"
+		android:gravity="end"
+		android:background="#464545">
+
+		<ImageView
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:contentDescription="@string/hsdk_wifi_ic"
+			android:src="@drawable/hsdk_ic_wifi" />
+
+		<ImageView
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:contentDescription="@string/hsdk_net_ic"
+			android:src="@drawable/hsdk_ic_cell" />
+
+		<ImageView
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:contentDescription="@string/hsdk_bat_ic"
+			android:src="@drawable/hsdk_ic_battery" />
+
+	</LinearLayout>
+
+	<LinearLayout
+		android:layout_width="match_parent"
+		android:layout_height="30dp"
+		android:paddingTop="@dimen/hsdk__small_padding"
+		android:paddingBottom="@dimen/hsdk__small_padding"
+		android:gravity="center_vertical"
+		android:background="#D6D6D6">
+
+		<ImageView
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:paddingStart="@dimen/hsdk__tiny_padding"
+			android:paddingEnd="@dimen/hsdk__tiny_padding"
+			android:contentDescription="@string/hsdk_back_ic"
+			android:src="@drawable/hsdk_ic_arrow_left" />
+
+		<View
+			android:layout_width="0dp"
+			android:layout_height="match_parent"
+			android:layout_weight="4"
+			android:background="#ADADAD"/>
+
+		<View
+			android:layout_width="0dp"
+			android:layout_height="match_parent"
+			android:layout_weight="5"
+			android:background="@color/hsdk_transparent"/>
+
+	</LinearLayout>
+
+</LinearLayout>

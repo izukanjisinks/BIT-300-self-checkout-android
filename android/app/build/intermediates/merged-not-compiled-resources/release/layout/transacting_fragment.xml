@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/hsdk_transparent"
+    tools:ignore="Overdraw"
+    android:importantForAccessibility="noHideDescendants">
+    <!--tools:showIn="@layout/transacting_activity">-->
+
+    <include android:id="@+id/confirm_layout"
+        layout="@layout/transacting_confirm"/>
+
+    <include android:id="@+id/key_check_layout"
+        layout="@layout/transacting_key_check"
+        android:visibility="gone"/>
+
+    <include android:id="@+id/bad_sim_layout"
+        layout="@layout/transacting_bad_sim"
+        android:visibility="gone"/>
+
+    <include android:id="@+id/pin_layout"
+        layout="@layout/transacting_pin"
+        android:visibility="gone"/>
+
+</LinearLayout>
