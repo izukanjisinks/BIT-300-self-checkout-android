@@ -97,7 +97,7 @@ class ProductCard extends StatelessWidget {
           padding: const EdgeInsets.symmetric(horizontal: 28.0,vertical: 12.0),
           child: GestureDetector(
             onTap: (){
-              final item = ItemModel(id: DateTime.now().toIso8601String(),title: product['title'],price: double.parse(product['price'].toString()),quantity: 1,sellerPhoneNumber: product['phoneNumber'],storeName:product['storeName'],saleCount: product['saleCount'],docId: product['docId'] );
+              final item = ItemModel(id: DateTime.now().toIso8601String(),title: product['title'],price: double.parse(product['price'].toString()),quantity: 1,sellerPhoneNumber: product['phoneNumber'],storeName:product['storeName'],saleCount: product['saleCount'],docId: product['docId'],stockQuantity: product['stockQuantity'] );
               if(CartViewModel().addCartItem(item, context)){
                 ScaffoldMessenger.of(context).showSnackBar(_alreadyInCart);
               }else{
@@ -105,6 +105,7 @@ class ProductCard extends StatelessWidget {
               }
             },
             child: Container(
+              color: Colors.transparent,
               child: Row(
                 mainAxisSize: MainAxisSize.min,
                 children: [
@@ -122,7 +123,7 @@ class ProductCard extends StatelessWidget {
 
   final _addedToCart = SnackBar(
     backgroundColor: Colors.deepPurple,
-    content: const Text('Added to cart',style: TextStyle(),),
+    content: const Text('Added to cart',style: TextStyle(),textAlign: TextAlign.center,),
     action: SnackBarAction(
       label: '',
       onPressed: () {
@@ -133,7 +134,7 @@ class ProductCard extends StatelessWidget {
 
   final _alreadyInCart = SnackBar(
     backgroundColor: Colors.deepPurple,
-    content: const Text('Product already in cart',style: TextStyle(),),
+    content: const Text('Product already in cart',style: TextStyle(),textAlign: TextAlign.center,),
     action: SnackBarAction(
       label: '',
       onPressed: () {

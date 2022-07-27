@@ -12,12 +12,12 @@ class UserViewModel with ChangeNotifier{
   int _seconds = 0;
 
   void phoneAuth(String firstName,String lastName,String address,String phoneNumber,BuildContext context){
-    Provider.of<UserModel>(context,listen: false).setDetails(firstName,lastName,address,phoneNumber,[],[]);
+    Provider.of<UserModel>(context,listen: false).setDetails(firstName,lastName,address,phoneNumber,[]);
     Provider.of<UserModel>(context,listen: false).start(context);
   }
 
   void googleAuth(String firstName,String lastName,String address,String phoneNumber,BuildContext context){
-    Provider.of<UserModel>(context,listen: false).setDetails(firstName,lastName,address,phoneNumber,[],[]);
+    Provider.of<UserModel>(context,listen: false).setDetails(firstName,lastName,address,phoneNumber,[]);
     Provider.of<UserModel>(context,listen: false).googleSignIn(context);
   }
 

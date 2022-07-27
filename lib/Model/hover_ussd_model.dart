@@ -43,24 +43,28 @@ class _HoverState extends State<Hover> {
   void setActionId(BuildContext context,String userPhoneNumber,String sellerPhoneNumber){
     WidgetsBinding.instance.addPostFrameCallback((_) {
       if(widget.carrier == 'MTN mobile money'){
-        actionId = "d89e8868";
-        if(userPhoneNumber.startsWith('+26095')){
-          Dialogs().incompatibleMobileMoneyDialog(context,'Note', 'Oops!Zamtel money not supported at the moment.');
-        }else
-          //check if trying to send money to airtel user, haven't added that action yet in hover
         if(sellerPhoneNumber.startsWith('+26097') || sellerPhoneNumber.startsWith('+26077')){
-          Dialogs().incompatibleMobileMoneyDialog(context, 'Note', 'Can not send to Airtel money using MTN mobile money at the moment, only MTN to MTN and Airtel to Airtel transactions supported at the moment!');
-        }else{
+          //airtel action id
+          actionId = "a17cf02b";
+          initPayment();
+        }else if(sellerPhoneNumber.startsWith('+26096') || sellerPhoneNumber.startsWith('+26076')){
+          actionId = "d89e8868";
           initPayment();
         }
       }else if(widget.carrier == 'Airtel mobile money'){
-        actionId = "d84201f6";
-        if(userPhoneNumber.startsWith('+26095')){
-          Dialogs().incompatibleMobileMoneyDialog(context,'Note', 'Oops!Zamtel money not supported at the moment.');
-        }else
-        if(sellerPhoneNumber.startsWith('+26096') ||sellerPhoneNumber.startsWith('+26076')){
-          Dialogs().incompatibleMobileMoneyDialog(context, 'Note', 'Can not send to MTN mobile money using Airtel money at the moment, only MTN to MTN and Airtel to Airtel transactions supported at the moment!');
+        if(sellerPhoneNumber.startsWith('+26097') || sellerPhoneNumber.startsWith('+26077')){
+          //airtel action id
+          actionId = "d84201f6";
+          initPayment();
+        }else if(sellerPhoneNumber.startsWith('+26096') || sellerPhoneNumber.startsWith('+26076')){
+          actionId = "d03ab708";
+          initPayment();
+        }
+      }else if(widget.carrier == 'Zamtel mobile money'){
+        if(!userPhoneNumber.startsWith('+26095')){
+          Dialogs().incompatibleMobileMoneyDialog(context,'Note','Only Zamtel to Zamtel transactions supported. Recipient is not on Zamtel');
         }else{
+          actionId = "462beeb3";
           initPayment();
         }
       }

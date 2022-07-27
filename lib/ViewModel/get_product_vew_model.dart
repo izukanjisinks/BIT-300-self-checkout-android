@@ -4,20 +4,13 @@ import '../Model/get_product_model.dart';
 
 class GetProductViewModel with ChangeNotifier{
 
-  Map<String,dynamic> product = {};
 
-
-  void getBarCode(Map<String,dynamic> arguments, BuildContext context){
+  Future<Map<String,dynamic>> getBarCode(Map<String,dynamic> arguments, BuildContext context) async{
 
     final getProductModel = Provider.of<GetProductModel>(context,listen: false);
 
-    getProductModel.getProduct(arguments, context);
+    return await getProductModel.getProduct(arguments, context);
 
-  }
-
-  void updateUI(Map<String,dynamic> _product){
-    product = _product;
-    notifyListeners();
   }
 
 

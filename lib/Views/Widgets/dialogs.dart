@@ -121,6 +121,45 @@ class Dialogs{
                           ],
                         ),
 
+                        SizedBox(height: 18.0,),
+
+                        Row(
+                          //mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            GestureDetector(
+                              onTap: () {
+                                setState(() {
+                                  carrier = 'Zamtel mobile money';
+                                });
+                              },
+                              child: Container(
+                                color: Colors.transparent,
+                                child: Row(
+                                  children: [
+                                    carrier == 'Zamtel mobile money'
+                                        ? Icon(
+                                      Icons.radio_button_checked,
+                                      color: Colors.deepPurple,
+                                    )
+                                        : Icon(
+                                      Icons.radio_button_unchecked_outlined,
+                                      color: Colors.deepPurple,
+                                    ),
+                                    SizedBox(
+                                      width: 5.0,
+                                    ),
+                                    Text(
+                                      'Zamtel  money',
+                                      style: TextStyle(
+                                          color: Colors.black45, fontSize: 14.0),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                            ),
+                          ],
+                        ),
+
                       ],
                     ),
                   ),

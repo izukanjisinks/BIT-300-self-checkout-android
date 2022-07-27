@@ -7,10 +7,8 @@ class HistoryViewModel with ChangeNotifier{
 
   List<dynamic> history = [];
 
-  void setHistory(BuildContext context){
-   history = Provider.of<HistoryModel>(context,listen: false).getHistory(context);
-   //print(history);
-   updateUI();
+  Future<List<Map<String,dynamic>>> fetchHistory(BuildContext context) async{
+  return Provider.of<HistoryModel>(context,listen: false).getHistory(context);
   }
 
   void updateUI(){
@@ -18,7 +16,7 @@ class HistoryViewModel with ChangeNotifier{
   }
 
   void removePurchase(BuildContext context, int index){
-    Provider.of<UserModel>(context,listen: false).removePurchase(context, index);
+    Provider.of<HistoryModel>(context,listen: false).removePurchase(context, index);
   }
 
 }

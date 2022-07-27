@@ -51,14 +51,10 @@ class ShoppingCart extends StatelessWidget {
                   Dialogs().cartEmpty(context);
                 }else {
                   final cartProvider = Provider.of<CartModel>(context, listen: false);
-                  cartProvider.purchaseItems(context);
-                  // final String userPhoneNumber = Provider
-                  //     .of<UserModel>(context, listen: false)
-                  //     .phoneNumber!;
-                  // String sellerPhoneNumber = _cartItemsList.isEmpty
-                  //     ? ''
-                  //     : _cartItemsList[0]['phoneNumber'];
-                  // Dialogs().carrier(context, userPhoneNumber, sellerPhoneNumber, Provider.of<CartViewModel>(context, listen: false).total(context).toString());
+                  //cartProvider.purchaseItems(context);
+                  final String userPhoneNumber = Provider.of<UserModel>(context, listen: false).userData!['phoneNumber'];
+                  String sellerPhoneNumber = _cartItemsList.isEmpty ? '' : _cartItemsList[0]['phoneNumber'];
+                  Dialogs().carrier(context, userPhoneNumber, sellerPhoneNumber, Provider.of<CartViewModel>(context, listen: false).total(context).toString());
                 }
               }, child: Text('Check Out',style: TextStyle(color: Colors.deepPurple,fontWeight: FontWeight.bold,fontSize: 18.0),))
             ],

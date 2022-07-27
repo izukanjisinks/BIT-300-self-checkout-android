@@ -3,12 +3,15 @@ import 'package:provider/provider.dart';
 import 'package:self_checkout_application/Model/user_model.dart';
 import 'package:self_checkout_application/ViewModel/history_view_model.dart';
 
-class History extends StatelessWidget {
+class History extends StatefulWidget {
 
 
+  @override
+  State<History> createState() => _HistoryState();
+}
+
+class _HistoryState extends State<History> {
   Map<String,dynamic>? map;
-
-
 
   String convertTime(String dateTime){
     DateTime _dateTime = DateTime.parse(dateTime);
@@ -25,8 +28,39 @@ class History extends StatelessWidget {
 
   }
 
+  List<Map<String,dynamic>> purchases = [];
+  bool gettingHistory = true;
+
+  @override
+  void initState() {
+    if(purchases.isEmpty) {
+      Provider.of<HistoryViewModel>(context, listen: false).fetchHistory(
+          context).then((value) {
+       purchases = value;
+       setState(() {
+         gettingHistory = false;
+       });
+      });
+    }else{
+      setState(() {
+        gettingHistory = false;
+      });
+    }
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
+
+    purchases.sort((a,b) {
+      DateTime aDate = DateTime.parse(a['products'][0]['id']);
+      DateTime bDate = DateTime.parse(b['products'][0]['id']);
+      return aDate.compareTo(bDate);
+    });
+
+    purchases = List.from(purchases.reversed);
+
+    //purchases.sort((a,b) => a['products'][0]['id'](b)['products'][0]['id']);
 
     Provider.of<HistoryViewModel>(context);
 
@@ -34,24 +68,18 @@ class History extends StatelessWidget {
       appBar: AppBar(
         elevation: 0.0,
         backgroundColor: Colors.white,
-        title: Text('History',style: TextStyle(color: Colors.deepPurple,fontWeight: FontWeight.bold),),
+        title: Text('Purchases',style: TextStyle(color: Colors.deepPurple,fontWeight: FontWeight.bold),),
         centerTitle: true,
       ),
-      body: _purchases(context),
+      body: gettingHistory ? Center(child: Container(height: 25.0,width: 25.0,child: CircularProgressIndicator(),),) : purchases.isEmpty ? Center(child: Text('purchases to show'),) : _purchases(context),
     );
   }
 
-
   Widget _purchases(BuildContext context){
 
-    final historyProvider = Provider.of<UserModel>(context).userData!['history'];
-
-    //historyProvider[index].values.toList()[1]
-
-    print(historyProvider[0].values.toList()[1]);
-
     return ListView.builder(itemBuilder: (BuildContext context, int index){
-       return   Padding(
+
+      return   Padding(
       padding: const EdgeInsets.symmetric(horizontal: 12.0, vertical: 5.0),
       child: Card(
         child: Column(
@@ -63,7 +91,7 @@ class History extends StatelessWidget {
                 Padding(
                   padding: const EdgeInsets.only(left: 15.0,top: 8.0),
                   child: Text(
-                    historyProvider[0].values.toList()[1][0]['storeName'].toString().toUpperCase(),
+                    purchases[index]['products'][0]['storeName'].toUpperCase(),
                     style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18.0,),
                   ),
                 ),
@@ -71,7 +99,7 @@ class History extends StatelessWidget {
                 Padding(
                   padding: const EdgeInsets.only(left: 15.0,top: 8.0),
                   child: Text(
-                    convertTime(historyProvider[index].keys.toList()[1]),
+                    convertTime(purchases[index]['products'][0]['id']),
                     style: TextStyle(fontWeight: FontWeight.normal, fontSize: 16.0,),
                   ),
                 ),
@@ -83,10 +111,13 @@ class History extends StatelessWidget {
                 color: Colors.black26,
               ),
             ),
-            _products(context,index),
+            _products(context,purchases[index]['products']),
             GestureDetector(
               onTap: () {
-               Provider.of<HistoryViewModel>(context, listen: false).removePurchase(context, index);
+                setState(() {
+                  purchases.removeAt(index);
+                  Provider.of<HistoryViewModel>(context, listen: false).removePurchase(context, index);
+                });
               },
               child: Container(
                 color: Colors.transparent,
@@ -121,11 +152,11 @@ class History extends StatelessWidget {
               padding: const EdgeInsets.symmetric(horizontal: 15.0),
               child: Row(
                 children: [
-                  Text('Total:',style: TextStyle(color: Colors.deepPurple,fontWeight: FontWeight.bold,fontSize: 16.0),),
-                  Expanded(child: Container()),
+                  Text('Ref# ${purchases[index]['reference']}',style: TextStyle(color: Colors.deepPurple,fontWeight: FontWeight.bold,fontSize: 16.0),),
+                  Spacer(),
                   Padding(
                     padding: const EdgeInsets.all(8.0),
-                    child: Text( 'K' + historyProvider[index]['total'].toString(),style: TextStyle(color: Colors.deepPurple,fontWeight: FontWeight.bold,fontSize: 16.0),),
+                    child: Text( 'Total: K' + purchases[index]['total'].toString(),style: TextStyle(color: Colors.deepPurple,fontWeight: FontWeight.bold,fontSize: 16.0),),
                   ),
                 ],
               ),
@@ -134,18 +165,17 @@ class History extends StatelessWidget {
         ),
       ),
     );
-    },itemCount: historyProvider.length,);
+    },itemCount: purchases.length,);
   }
 
-
-  Widget _products(BuildContext context, int index){
+  Widget _products(BuildContext context, List<dynamic> products){
 
     final historyProvider = Provider.of<UserModel>(context).userData!['history'];
 
 
     List<Widget> items = [];
 
-    for (int i = 0; i < historyProvider[index].values.toList()[1].length; i++) {
+    for (int i = 0; i < products.length; i++) {
 
 
       Widget item = Card(
@@ -160,7 +190,7 @@ class History extends StatelessWidget {
                     CircleAvatar(
                       child: Padding(
                         padding: const EdgeInsets.all(4.0),
-                        child: FittedBox(child: Text('\K${historyProvider[index].values.toList()[1][i]['price']}')),
+                        child: FittedBox(child: Text('\K${products[i]['price']}')),
                       ),
                     ),
                     SizedBox(
@@ -173,11 +203,11 @@ class History extends StatelessWidget {
                         Container(
                             width: 120.0,
                             child: Text(
-                              historyProvider[index].values.toList()[1][i]['title'],
+                              products[i]['title'],
                               overflow: TextOverflow.ellipsis,
                             )),
                         Text(
-                            'Total \K${historyProvider[index].values.toList()[1][i]['price'] * historyProvider[index].values.toList()[1][i]['quantity']}'),
+                            'Total \K${products[i]['price'] * products[i]['quantity']}'),
                       ],
                     ),
                     Spacer(),
@@ -185,7 +215,7 @@ class History extends StatelessWidget {
                       mainAxisSize: MainAxisSize.min,
                       children: [
                         Text(
-                          '${historyProvider[index].values.toList()[1][i]['quantity']} x',
+                          '${products[i]['quantity']} x',
                           style: TextStyle(fontSize: 12.0),
                         ),
                       ],
@@ -203,5 +233,4 @@ class History extends StatelessWidget {
       children: items,
     );
   }
-
 }

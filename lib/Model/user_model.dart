@@ -7,7 +7,6 @@ import 'package:flutter/material.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:provider/provider.dart';
 import 'package:self_checkout_application/Model/cart_model.dart';
-import 'package:self_checkout_application/ViewModel/history_view_model.dart';
 import 'package:self_checkout_application/ViewModel/user_account_view_model.dart';
 import 'package:self_checkout_application/ViewModel/user_view_model.dart';
 import 'package:self_checkout_application/Views/create_account_page.dart';
@@ -29,7 +28,6 @@ class UserModel with ChangeNotifier {
   String? address;
   String? userId;
   String? phoneNumber;
-  List<dynamic> history = [];
   List<dynamic> _savedCartList = [];
   bool showGuide = true;
 
@@ -65,25 +63,12 @@ class UserModel with ChangeNotifier {
     updateAccount(context);
   }
 
-  void removePurchase(BuildContext context, int index) async {
-    Dialogs().processing(context);
-    history.removeAt(index);
-    //update changes in firebase
-    await FirebaseFirestore.instance
-        .collection('users')
-        .doc(docId)
-        .update(userData!);
-    Navigator.of(context).pop();
-    Provider.of<HistoryViewModel>(context, listen: false).updateUI();
-  }
 
-  void setDetails(firstName, lastName, address, phoneNumber,
-      List<dynamic> history, List<dynamic> cart) {
+  void setDetails(firstName, lastName, address, phoneNumber, List<dynamic> cart) {
     this.firstName = firstName;
     this.lastName = lastName;
     this.address = address;
     this.phoneNumber = phoneNumber;
-    this.history = history;
     this._savedCartList = cart;
   }
 
@@ -130,6 +115,7 @@ class UserModel with ChangeNotifier {
         } else {
           errorMessage = 'Could not sign you in, try again later!';
         }
+        //printed to console for debugging
         print('error messages');
         print(e.code);
         print(e.message);
@@ -179,7 +165,6 @@ class UserModel with ChangeNotifier {
         'lastName': lastName,
         'address': address,
         'phoneNumber': phoneNumber,
-        'history': history,
         'savedCartList': _savedCartList,
         'showGuide': showGuide
       };
@@ -203,7 +188,6 @@ class UserModel with ChangeNotifier {
           Navigator.of(context).pushReplacementNamed(HomePage.routeName);
         });
       } else {
-        print('welcome back!');
         setUserDetails(
             user.docs[0].data()['userId'],
             user.docs[0].data()['firstName'],
@@ -211,7 +195,6 @@ class UserModel with ChangeNotifier {
             user.docs[0].data()['address'],
             user.docs[0].data()['phoneNumber'],
             user.docs[0].data()['showGuide'],
-          user.docs[0].data()['history'],
           user.docs[0].data()['savedCartList'],
         );
         updateToken();
@@ -339,7 +322,6 @@ class UserModel with ChangeNotifier {
         user.docs[0].data()['address'],
         user.docs[0].data()['phoneNumber'],
         user.docs[0].data()['showGuide'],
-        user.docs[0].data()['history'],
         user.docs[0].data()['savedCartList'],
 
     );
@@ -355,41 +337,36 @@ class UserModel with ChangeNotifier {
         .collection('users')
         .doc(docId)
         .update(userData!);
-    // setUserDetails(userData!['userId'], userData!['firstName'], userData!['lastName'],
-    //     userData!['address'], userData!['phoneNumber'], userData!['showGuide'],userData!['history'],userData!['savedCartList']);
-    //Dialogs().changesSaved(context);
   }
 
   Future<bool> purchase(
       List<dynamic> list, BuildContext context, double total) async {
     bool successful = true;
     String datePurchased = DateTime.now().toIso8601String();
+    String reference = DateTime.now().hour.toString() + DateTime.now().minute.toString() + DateTime.now().second.toString()  ;
+    String storeId = list[0]['phoneNumber'];
     //items in cart go to history list since they are now purchased
     for (int i = 0; i < list.length; i++) {
       list[i]['id'] = datePurchased;
     }
-    userData!['history'].add({datePurchased: list, 'total': total});
-    //saved cart list can now be empty
+
     userData!['savedCartList'] = [];
 
-    await updateAccount(context)
-        .catchError((onError) {
-      successful = false;
-      Dialogs().error(context);
-    });
+    FirebaseFirestore.instance.collection('purchases').add({'products': list, 'total': total,'id' : userData!['phoneNumber'],'reference' : reference,'storeId' : storeId});
     Dialogs().purchaseSuccessful(context);
     return successful;
   }
 
+
+
   void setUserDetails(String _uid, String firstName, String lastName,
-      String address, String phoneNumber, bool showGuide,List<dynamic> history, List<dynamic> savedCartList) {
+      String address, String phoneNumber, bool showGuide, List<dynamic> savedCartList) {
     userData = {
       'userId': _uid,
       'firstName': firstName,
       'lastName': lastName,
       'address': address,
       'phoneNumber': phoneNumber,
-      'history': history,
       'savedCartList': savedCartList,
       'showGuide': showGuide
     };
@@ -419,7 +396,6 @@ class UserModel with ChangeNotifier {
       'lastName': lastName,
       'address': address,
       'phoneNumber': phoneNumber,
-      'history': history,
       'savedCartList': _savedCartList,
       'showGuide': showGuide
     };
@@ -450,7 +426,6 @@ class UserModel with ChangeNotifier {
           user.docs[0].data()['address'],
           user.docs[0].data()['phoneNumber'],
           user.docs[0].data()['showGuide'],
-        user.docs[0].data()['history'],
         user.docs[0].data()['savedCartList'],
       );
       updateToken();

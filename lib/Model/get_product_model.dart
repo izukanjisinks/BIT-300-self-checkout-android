@@ -14,7 +14,7 @@ class GetProductModel with ChangeNotifier {
   List<String>  _productDocId = [];
   List<dynamic> _productsBought = [];
 
-  Future<void> getProduct(Map<String,dynamic> arguments, BuildContext context) async {
+  Future<Map<String,dynamic>> getProduct(Map<String,dynamic> arguments, BuildContext context) async {
     
     final barCode = arguments['barCode'].toString();
 
@@ -31,7 +31,7 @@ class GetProductModel with ChangeNotifier {
       print(e);
     });
 
-    print(response.docs[0].data());
+    print(response.docs);
 
     if(response.docs.isEmpty){
       //no product found
@@ -41,10 +41,9 @@ class GetProductModel with ChangeNotifier {
       product.putIfAbsent('docId', () => response.docs[0].id);
       _productDocId.add(response.docs[0].id);
     }
-    final getProductViewModel = Provider.of<GetProductViewModel>(context, listen: false);
-    getProductViewModel.updateUI(product);
-    print(product);
+    if(product.isNotEmpty)
     getStoreDetails(product['storeName'], product['phoneNumber']);
+    return product;
   }
 
   //we also get the store details to update them when we purchase a product
@@ -87,6 +86,10 @@ class GetProductModel with ChangeNotifier {
     for(int i = 0; i < _productsBought.length; i++){
       var collection =  FirebaseFirestore.instance.collection('products');
       _productsBought[i]['saleCount'] = _productsBought[i]['saleCount'] + 1;
+      if(_productsBought[i]['stockQuantity'] != 0) {
+        print(_productsBought[i]['stockQuantity']);
+        _productsBought[i]['stockQuantity'] = _productsBought[i]['stockQuantity'] - 1;
+      }
       await collection.doc(_productsBought[i]['docId']).update(_productsBought[i]);
     }
   }

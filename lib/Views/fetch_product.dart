@@ -18,22 +18,29 @@ class FetchProduct extends StatefulWidget {
 class _FetchProductState extends State<FetchProduct> {
 
   bool _fetch = true;
+  bool _loadingProduct = true;
 
-  void fetchProduct(BuildContext context, Map<String,dynamic> arguments){
+  Map<String,dynamic> product = {};
+
+  void fetchProduct(BuildContext context, Map<String,dynamic> arguments) async{
 
     final getProductViewModel = Provider.of<GetProductViewModel>(context, listen: false);
 
-    getProductViewModel.getBarCode(arguments, context);
+    getProductViewModel.getBarCode(arguments, context).then((value) {
+      setState(() {
+        _loadingProduct = false;
+        product = value;
+      });
+    });
 
   }
 
   @override
   void initState() {
-//    String code = ModalRoute.of(context)!.settings.arguments as String;
-//    Future.delayed(Duration.zero, () {
-//      fetchProduct(context, code);
-//    });
-
+    WidgetsBinding.instance.addPostFrameCallback((_){
+      Map<String,dynamic> arguments = ModalRoute.of(context)!.settings.arguments as Map<String,dynamic>;
+      fetchProduct(context, arguments);
+    });
     super.initState();
   }
 
@@ -45,10 +52,10 @@ class _FetchProductState extends State<FetchProduct> {
     Map<String,dynamic> arguments = ModalRoute.of(context)!.settings.arguments as Map<String,dynamic>;
 
     if(_fetch)
-      fetchProduct(context, arguments);
+     // fetchProduct(context, arguments);
     _fetch = false;
 
-    Map<String,dynamic> product = Provider.of<GetProductViewModel>(context, listen: true).product;
+    //Map<String,dynamic> product = Provider.of<GetProductViewModel>(context, listen: true).product;
 
     print(product);
     return Scaffold(
@@ -91,7 +98,7 @@ class _FetchProductState extends State<FetchProduct> {
           ),
         ],
       ),
-      body: product == null ? Center(child: Container(height: 20.0,width: 20.0,child: CircularProgressIndicator(),),) : product.isEmpty ? Center(child: Text('Product not found!'),) : SingleChildScrollView(
+      body:_loadingProduct ? Center(child: Container(height: 20.0,width: 20.0,child: CircularProgressIndicator(),),) : product.isEmpty ? Center(child: Text('Product not found!'),) : SingleChildScrollView(
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [

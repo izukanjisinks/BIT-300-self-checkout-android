@@ -78,35 +78,15 @@ class _HomePageState extends State<HomePage> {
   }
 
 
-//  Future<void> initPlatformState() async {
-//    WifiInfoWrapper? wifiObject;
-//    // Platform messages may fail, so we use a try/catch PlatformException.
-//    try {
-//      wifiObject = await WifiInfoPlugin.wifiDetails;
-//    } on PlatformException {}
-//    if (!mounted) return;
-//
-//    _wifiObject = wifiObject;
-//
-//    print(_wifiObject!.ssid);
-//    print(_wifiObject!.bssId);
-//    print(_wifiObject!.connectionType);
-//    print(_wifiObject!.ipAddress);
-//    print(_wifiObject!.networkId);
-//
-//  }
-
-
   void _getWifiName(BuildContext context) async{
 
-//    if (await Permission.location.isDenied) {
-//      Permission.location.request();
-//    } else if (await Permission.location.isGranted)
-//      NetworkInfo().getWifiName().then((value) => print(value));
+   if (await Permission.location.isDenied) {
+     await Permission.location.request();
+   }
 
     print('getting name');
     Dialogs().processing(context);
-     final wifi = await Provider.of<WifiModel>(context,listen: false).getWifiName();
+    await Provider.of<WifiModel>(context,listen: false).getWifiName();
 
     final wifiModel = Provider.of<WifiModel>(context,listen: false);
     print('gotten name');

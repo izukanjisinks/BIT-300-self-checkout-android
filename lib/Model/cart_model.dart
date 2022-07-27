@@ -14,8 +14,9 @@ class ItemModel{
   String storeName;
   String docId;
   int saleCount;
+  int stockQuantity;
 
-  ItemModel({required this.id, required this.title, required this.quantity, required this.price,required this.sellerPhoneNumber,required this.storeName,required this.docId,required this.saleCount});
+  ItemModel({required this.id, required this.title, required this.quantity, required this.price,required this.sellerPhoneNumber,required this.storeName,required this.docId,required this.saleCount,required this.stockQuantity});
 }
 
 class CartModel with ChangeNotifier{
@@ -34,7 +35,8 @@ class CartModel with ChangeNotifier{
       'price' : item.price,
       'phoneNumber' : item.sellerPhoneNumber,
       'docId' : item.docId,
-      'saleCount' : item.saleCount
+      'saleCount' : item.saleCount,
+      'stockQuantity': item.stockQuantity
     };
 
     cartList.add(_cartItem);
